@@ -133,7 +133,6 @@ button.plan{position:relative;display:block;width:100%;text-align:left;color:var
 #mp .leaflet-popup-content-wrapper{border-radius:16px}#mp .leaflet-popup-content{margin:12px 14px;font-family:"Plus Jakarta Sans",sans-serif;color:#111}
 .pp .pk{display:block;font:700 .62rem "JetBrains Mono",monospace;color:#be123c;text-transform:uppercase;letter-spacing:.5px}.pp h4{margin:4px 0 2px;font:700 1.05rem Oswald,Impact,sans-serif;text-transform:uppercase;color:#07060C}.pp span{font-size:.75rem;color:#555}.pp p{margin:6px 0 8px!important;font-size:.8rem;line-height:1.35;color:#222}
 .pp .ppb{display:flex;gap:6px}.pp .ppb>*{flex:1;text-align:center;border:0;border-radius:999px;padding:7px 8px;font:700 .75rem "Plus Jakarta Sans",sans-serif;cursor:pointer;text-decoration:none}.pp .ppb button{background:#F43F5E;color:#fff}.pp .ppb a{background:#eee;color:#111!important}
-#mp .leaflet-control-layers{border-radius:12px;font-family:"Plus Jakarta Sans",sans-serif;color:#111}
 @media(max-width:600px){.hidem{display:none}}
 </style>
 </head>
@@ -340,11 +339,7 @@ async function openMap(){
  if(typeof L=="undefined"){$("#mp").innerHTML='<p class="mut" style="padding:20px">Carte indisponible : la bibliothèque Leaflet ne s’est pas chargée.</p>';return}
  MAPL=L.map("mp").setView(S.lat?[S.lat,S.lng]:[46.6,2.4],S.lat?8:6);
  const OSMA='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>';
- const BL={"Plan":L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{maxZoom:19,subdomains:"abcd",attribution:OSMA+' © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'}),
-  "Sombre":L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{maxZoom:19,subdomains:"abcd",attribution:OSMA+' © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'}),
-  "OpenStreetMap":L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:OSMA})};
- let ok=0,ko=0;BL.Plan.on("tileload",()=>ok++).on("tileerror",()=>{if(++ko>=4&&!ok&&MAPL.hasLayer(BL.Plan)){MAPL.removeLayer(BL.Plan);BL.OpenStreetMap.addTo(MAPL)}});
- BL.Plan.addTo(MAPL);L.control.layers(BL,null,{position:"topright"}).addTo(MAPL);L.control.scale({imperial:false}).addTo(MAPL);
+ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:OSMA}).addTo(MAPL);L.control.scale({imperial:false}).addTo(MAPL);
  setTimeout(()=>MAPL.invalidateSize(),250);
  GRP=L.layerGroup().addTo(MAPL);CIR=null;
  const sel=p=>{CIR&&MAPL.removeLayer(CIR);CIR=L.circle([p.lat,p.lng],{radius:1000,color:"#F43F5E",fillColor:"#F43F5E",fillOpacity:.15,weight:1}).addTo(MAPL);MAPL.flyTo([p.lat,p.lng],13,{duration:1.2});const gm=`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;L.popup({maxWidth:260,autoPanPadding:[20,20]}).setLatLng([p.lat,p.lng]).setContent(`<div class="pp"><b class="pk">${CAT[p.cat]}</b><h4>${p.name}</h4><span>${p.city} (${p.dep}) · Peur ${p.fear}/${FMAX}${p.d!=null?` · ${Math.round(p.d)} km`:""}</span><p>${p.ph}</p><div class="ppb"><button data-a="dz">Lire le dossier</button><a href="${gm}" target="_blank" rel="noopener">Itinéraire</a></div></div>`).openOn(MAPL);$("#dz").innerHTML=`<p class="kk">${CAT[p.cat].toUpperCase()}</p><h2>${p.name}</h2><p class="mono sm mut">${p.city} (${p.dep}) · ${esc(p.region)}</p><div class="rowb" style="font-size:1rem"><b class="mono g">Indice de peur ${p.fear}/${FMAX}</b>${p.d!=null?`<span class="mono mut">${Math.round(p.d)} km de ${esc(S.city)}</span>`:""}</div><p><b>Phénomènes :</b> ${p.ph}</p><p class="mut">${p.h}</p><p class="mono sm mut">Zone ≈ ${p.lat.toFixed(2)}, ${p.lng.toFixed(2)} (précision ~1 km). ${p.acc}</p><a class="btn" href="https://www.google.com/maps?q=${p.lat},${p.lng}" target="_blank" rel="noopener">Ouvrir la zone dans Google Maps</a>`};
