@@ -87,7 +87,7 @@ const REG=["Bretagne","Île-de-France","Provence-Alpes-Côte d'Azur","Nouvelle-A
 const CAT=["Château & manoir","Asile, sanatorium & urbex","Forêt & lieu maudit","Cimetière & crypte","Monument religieux & abbaye","Légende & lieu mystérieux"];
 const CATCODE={chateau:0,sanatorium:1,hopital:1,urbex:1,foret:2,cimetiere:3,souterrain:3,abbaye:4,autre:5};
 const catOf=c=>c in CATCODE?CATCODE[c]:Math.max(0,CAT.indexOf(c));
-let NBL="…",NBN=0,GOOGLE_ON=false;const setNb=n=>{NBN=n;NBL=n>=300?"300+":n>=100?"100+":String(n);$$(".nbl").forEach(e=>e.textContent=NBL)};if(SB)SB.rpc("get_spots_total").then(r=>{if(r.data)setNb(r.data)});
+let NBL="…",NBN=0,GOOGLE_ON=false;const setNb=n=>{NBN=n;NBL=String(n);$$(".nbl").forEach(e=>e.textContent=NBL)};if(SB)SB.rpc("get_spots_total").then(r=>{if(r.data)setNb(r.data)});
 const hav=(a,b,c,d)=>{const r=x=>x*Math.PI/180,u=r(c-a),v=r(d-b),h=Math.sin(u/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(v/2)**2;return 12742*Math.asin(Math.sqrt(h))};
 const save=()=>{try{localStorage.setItem("spectra_user",JSON.stringify({pseudo:S.pseudo,email:S.email,city:S.city,lat:S.lat,lng:S.lng,fear:S.fear,age:S.age,cp:S.cp}))}catch(e){}};
 const FLD=a=>a.map(([l,t,v])=>t=="area"?`<textarea class="in" rows="5" placeholder="${l}" aria-label="${l}"></textarea>`:`<input class="in" type="${t=="email"?"email":"text"}" placeholder="${l}" aria-label="${l}" value="${v||""}">`).join("");
@@ -109,7 +109,7 @@ function gate(){
  show("#gt");TRK("gate");const c=esc(S.city.toUpperCase()),p=esc(S.pseudo.toUpperCase()),n=S.cnt;
  $("#gt").innerHTML=`<div class="gb">${RAD(S.near)}</div><div class="gate"><div class="fb">${LG}</div><div class="cd"><span class="tier g" style="border-color:var(--g);font-size:.9rem;margin-top:0">${S.nearN>0?`✓ ${S.nearN} LIEU${S.nearN>1?"X":""} À MOINS DE 100 KM DE ${c}`:`✓ ${n} LIEUX RÉFÉRENCÉS · DÉPART : ${c}`}</span><h1>CRÉE TON COMPTE POUR RÉVÉLER LA CARTE, <span class="g">${p}</span></h1><p class="mut">Accède aux dossiers de ton secteur et à la carte interactive de France et de Corse.</p><div id="ggw"${GOOGLE_ON?"":" hidden"}><button class="btn wh big" data-a="gg">${GG} Continuer avec Google</button><p class="mut sm" style="text-align:center;margin:14px 0 0">ou avec ton e-mail</p></div><input class="in" id="em" type="email" aria-label="Adresse e-mail" placeholder="E-mail" autocomplete="email"><div style="position:relative"><input class="in" id="pw" type="password" aria-label="Mot de passe, 8 caractères minimum" placeholder="Mot de passe (8 caractères min.)" autocomplete="new-password"><button class="lk0" data-a="eye" style="position:absolute;right:6px;top:21px;min-width:44px;min-height:44px" aria-label="Afficher le mot de passe">👁</button></div><button class="btn big" id="sbtn" data-a="sub">Créer mon compte et continuer →</button><div id="aerr" class="err" role="alert" hidden></div><p class="pay-note">En créant ton compte, tu confirmes avoir pris connaissance de la <a href="/confidentialite" target="_blank" rel="noopener">politique de confidentialité</a>.</p></div></div>`;
 }
-const FEAT=[["Accès à tous les lieux de France &amp; Corse",1],["Carte interactive avec la position de chaque lieu",1],["Fiches historiques et phénomènes signalés",1],["Filtres par région, catégorie et indice de peur",1],["Nouveaux lieux ajoutés chaque mois",1],["Prix bloqué pendant 12 mois",0],["Un seul paiement pour toute l’année",0],["75 % d’économie (2,49 €/mois)",0]];
+const FEAT=[["Accès à tous les lieux de France &amp; Corse",1],["Carte interactive avec la position de chaque lieu",1],["Fiches avec histoire, légendes et sources citées",1],["Filtres par région, catégorie et indice de peur",1],["Nouveaux lieux ajoutés régulièrement",1],["Prix bloqué pendant 12 mois",0],["Un seul paiement pour toute l’année",0],["75 % d’économie (2,49 €/mois)",0]];
 const PLAN={m:{link:()=>STRIPE_MONTHLY_LINK,cta:"M’abonner à la formule mensuelle · 9,99 €/mois →"},y:{link:()=>STRIPE_ANNUAL_LINK,cta:"M’abonner à la formule annuelle · 29,99 €/an →"}};
 function pay(){
  if(!S.uid){toast("Connecte-toi pour continuer.");return A.loginForm()}
@@ -161,8 +161,8 @@ const loadLeaflet=()=>typeof L!="undefined"?Promise.resolve():LEAF||(LEAF=new Pr
 async function openMap(){
  if(!SB)return svcDown();
  if(!(await isPrem()))return pay();
- const{data,error}=await SB.from("spots").select("*");if(error||!data)return toast("Chargement des lieux impossible. Réessaie dans un instant.");
- const all=data.map(r=>({id:r.id,name:esc(r.name||""),city:esc(r.city||""),dep:esc(r.department||""),region:r.region||"",lat:+r.latitude,lng:+r.longitude,cat:catOf(r.category),fear:+r.fear_level||1,ph:esc(r.description||""),h:esc(r.history||""),acc:esc(r.access_tips||""),q:norm((r.name||"")+" "+(r.city||"")+" "+(r.department||"")),d:S.lat?hav(S.lat,S.lng,r.latitude,r.longitude):null}));
+ const{data,error}=await SB.from("spots").select("id,name,category,region,department,city,latitude,longitude,fear_level,description,history,access_tips,source_label,source_url,nature");if(error||!data)return toast("Chargement des lieux impossible. Réessaie dans un instant.");
+ const all=data.map(r=>({id:r.id,name:esc(r.name||""),city:esc(r.city||""),dep:esc(r.department||""),region:r.region||"",lat:+r.latitude,lng:+r.longitude,cat:catOf(r.category),fear:+r.fear_level||1,ph:esc(r.description||""),h:esc(r.history||""),acc:esc(r.access_tips||""),nat:r.nature||"",sl:esc(r.source_label||""),su:/^https:\/\//.test(r.source_url||"")?esc(r.source_url):"",q:norm((r.name||"")+" "+(r.city||"")+" "+(r.department||"")),d:S.lat?hav(S.lat,S.lng,r.latitude,r.longitude):null}));
  const byId=new Map(all.map(p=>[String(p.id),p]));
  show("#ap");
  $("#ap").innerHTML=`<div class="fb">${LG}<div class="hr"><span class="mono sm hidem">${esc(S.pseudo||"Explorateur")}</span><button class="lk0 sm" data-a="pg" data-k="resil">Mon abonnement</button><button class="lk0 sm" data-a="logout">Se déconnecter</button><button class="lk0" data-a="home">Quitter ✕</button></div></div><div class="w" style="max-width:1100px"><h1 class="vh">Ta carte Spectra</h1><div class="flt"><input class="in" id="ft" aria-label="Rechercher une ville ou un lieu" placeholder="🔍 Ville ou lieu..."><select class="in" id="fr" aria-label="Région"><option value="">Toutes les régions</option>${REG.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join("")}</select><select class="in" id="fk" aria-label="Catégorie"><option value="">Toutes catégories</option>${CAT.map((c,i)=>`<option value="${i}">${c}</option>`).join("")}</select><label class="mono sm">Indice de peur ≥ <b id="fv">1</b>/${FMAX}<input type="range" id="fs" min="1" max="${FMAX}" value="1"></label></div><p class="mono sm mut" id="fcnt" role="status" style="margin:8px 0 0"></p><div id="mp" role="region" aria-label="Carte des lieux"></div><details class="plist"><summary id="lsm">Liste des lieux</summary><ul id="lsu"></ul></details><div class="cd" id="dz" aria-live="polite" style="max-width:none;margin-bottom:40px">Touche un point rouge ou choisis un lieu dans la liste : la carte zoome dessus et son résumé s’affiche. Le dossier complet apparaît ici.</div></div>`;
@@ -170,24 +170,25 @@ async function openMap(){
  const ok=typeof L!="undefined";
  if(ok){
   try{MAPL&&MAPL.remove()}catch(e){}
-  MAPL=L.map("mp").setView(S.lat?[S.lat,S.lng]:[46.6,2.4],S.lat?8:6);
+  MAPL=L.map("mp",{preferCanvas:true}).setView(S.lat?[S.lat,S.lng]:[46.6,2.4],S.lat?8:6);
   const OSMA='© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>';
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:OSMA}).addTo(MAPL);L.control.scale({imperial:false}).addTo(MAPL);
   setTimeout(()=>MAPL.invalidateSize(),250);
   GRP=L.layerGroup().addTo(MAPL);CIR=null;
  }
+ const NATL={hante:["Phénomènes signalés :","PHÉNOMÈNES SIGNALÉS"],legende:["Légende locale :","LÉGENDE LOCALE"],histoire:["Lieu documenté :","LIEU DOCUMENTÉ"]};
  const sel=p=>{
-  $("#dz").innerHTML=`<p class="kk">${CAT[p.cat].toUpperCase()}</p><h2>${p.name}</h2><p class="mono sm mut">${p.city} (${p.dep}) · ${esc(p.region)}</p><div class="rowb" style="font-size:1rem"><b class="mono g">Indice de peur ${p.fear}/${FMAX}</b>${p.d!=null?`<span class="mono mut">${Math.round(p.d)} km de ${esc(S.city)}</span>`:""}</div><p><b>Phénomènes :</b> ${p.ph}</p><p class="mut">${p.h}</p><p class="mono sm mut">Coordonnées : ${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}. ${p.acc}</p><a class="btn" href="https://www.google.com/maps?q=${p.lat},${p.lng}" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>`;
+  $("#dz").innerHTML=`<p class="kk">${CAT[p.cat].toUpperCase()}${NATL[p.nat]?" · "+NATL[p.nat][1]:""}</p><h2>${p.name}</h2><p class="mono sm mut">${p.city} (${p.dep}) · ${esc(p.region)}</p><div class="rowb" style="font-size:1rem"><b class="mono g">Indice de peur ${p.fear}/${FMAX}</b>${p.d!=null?`<span class="mono mut">${Math.round(p.d)} km de ${esc(S.city)}</span>`:""}</div><p><b>${NATL[p.nat]?NATL[p.nat][0]:"Phénomènes :"}</b> ${p.ph}</p><p class="mut">${p.h}</p><p class="mono sm mut">Coordonnées : ${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}. ${p.acc}</p>${p.sl?`<p class="mono sm mut">Source : ${p.sl}${p.su?` · <a href="${p.su}" target="_blank" rel="noopener">voir la notice</a>`:""}</p>`:""}<a class="btn" href="https://www.google.com/maps?q=${p.lat},${p.lng}" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>`;
   if(!ok)return $("#dz").scrollIntoView({behavior:RM?"auto":"smooth"});
   CIR&&MAPL.removeLayer(CIR);CIR=L.circleMarker([p.lat,p.lng],{radius:16,color:"#fff",fillColor:"#F43F5E",fillOpacity:.2,weight:2}).addTo(MAPL);MAPL.flyTo([p.lat,p.lng],13,{duration:RM?0:1.2});
   const gm=`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
   L.popup({maxWidth:260,autoPanPadding:[20,20]}).setLatLng([p.lat,p.lng]).setContent(`<div class="pp"><b class="pk">${CAT[p.cat]}</b><b class="pn">${p.name}</b><span>${p.city} (${p.dep}) · Peur ${p.fear}/${FMAX}${p.d!=null?` · ${Math.round(p.d)} km`:""}</span><p>${p.ph}</p><div class="ppb"><button data-a="dz">Lire le dossier</button><a href="${gm}" target="_blank" rel="noopener">Itinéraire</a></div></div>`).openOn(MAPL)};
  MAPSEL=id=>{const p=byId.get(String(id));if(p)sel(p)};
  const f=()=>{const q=norm($("#ft").value.trim()),r=$("#fr").value,k=$("#fk").value,m=+$("#fs").value;$("#fv").textContent=m;ok&&GRP.clearLayers();const shown=all.filter(p=>!(q&&!p.q.includes(q)||r&&p.region!=r||k!==""&&p.cat!=k||p.fear<m));
-  if(ok)shown.forEach(p=>L.circleMarker([p.lat,p.lng],{radius:7,color:"#F43F5E",fillColor:"#F43F5E",fillOpacity:.85,weight:2,className:"pulse"}).on("click",()=>sel(p)).addTo(GRP));
+  if(ok)shown.forEach(p=>L.circleMarker([p.lat,p.lng],{radius:7,color:"#F43F5E",fillColor:"#F43F5E",fillOpacity:.85,weight:2}).on("click",()=>sel(p)).addTo(GRP));
   const n=shown.length;$("#fcnt").textContent=n+" lieu"+(n>1?"x":"")+" affiché"+(n>1?"s":"");$("#lsm").textContent="Liste des lieux ("+n+")";
   $("#lsu").innerHTML=shown.map(p=>`<li><button data-a="pickp" data-i="${p.id}">${p.name}<small>${p.city} (${p.dep}) · Peur ${p.fear}/${FMAX}</small></button></li>`).join("")};
- ["ft","fr","fk","fs"].forEach(i=>$("#"+i).oninput=$("#"+i).onchange=f);f();
+ ["ft","fr","fk","fs"].forEach(i=>$("#"+i).oninput=f);f();
 }
 
 const fl=v=>TR.findIndex(x=>v<=x[0])+1;
@@ -247,7 +248,7 @@ const A={
  scan:async()=>{show("#sn");S.nearN=null;$("#st").textContent=`Recherche des lieux autour de ${S.city}...`;$("#cn").textContent=0;
   let near=null;
   if(SB&&S.lat){try{const r=await Promise.race([SB.rpc("get_nearby_spots_count",{p_lat:Math.round(S.lat*10)/10,p_lng:Math.round(S.lng*10)/10,p_radius_km:100}),wait(4000).then(()=>null)]);if(r&&typeof r.data=="number")near=r.data}catch(e){}}
-  const tot=NBN||98,t=near>0?near:tot;S.nearN=near;S.cnt=t;S.near=[...Array(Math.min(20,t))].map(()=>({d:rnd()*60}));
+  const tot=NBN||418,t=near>0?near:tot;S.nearN=near;S.cnt=t;S.near=[...Array(Math.min(20,t))].map(()=>({d:rnd()*60}));
   $("#sl").textContent=near>0?"LIEUX À MOINS DE 100 KM":"LIEUX RÉFÉRENCÉS";
   const end=()=>{$("#st").textContent=near>0?`✓ ${near} lieu${near>1?"x":""} à moins de 100 km de ${S.city}, ${tot} en tout en France et en Corse`:near===0?`✓ Aucun lieu à moins de 100 km de ${S.city} : ${tot} t’attendent ailleurs en France et en Corse`:`✓ ${tot} lieux référencés en France et en Corse sont prêts`;setTimeout(gate,600)};
   let n=0;const iv=setInterval(()=>{$("#cn").textContent=++n;if(n>=t){clearInterval(iv);end()}},Math.max(24,2300/t|0))},
