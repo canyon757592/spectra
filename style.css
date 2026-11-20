@@ -1,0 +1,167 @@
+/* Polices hébergées sur le site (aucune requête vers Google) */
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;font-style:normal;font-display:swap;src:url(/fonts/plus-jakarta-sans-500.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/plus-jakarta-sans-700.woff2) format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:800;font-style:normal;font-display:swap;src:url(/fonts/plus-jakarta-sans-800.woff2) format("woff2")}
+@font-face{font-family:Oswald;font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/oswald-700.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:500;font-style:normal;font-display:swap;src:url(/fonts/jetbrains-mono-500.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/jetbrains-mono-700.woff2) format("woff2")}
+/* Polices de repli calibrées pour que le texte ne saute pas au chargement */
+@font-face{font-family:"Oswald Fallback";font-weight:700;src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Helvetica Neue Bold");size-adjust:82%;ascent-override:145%;descent-override:35%;line-gap-override:0%}
+@font-face{font-family:"Jakarta Fallback";font-weight:400 900;src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica Neue");size-adjust:101%;ascent-override:103%;descent-override:22%;line-gap-override:0%}
+@font-face{font-family:"Mono Fallback";font-weight:400 900;src:local("Courier New"),local("CourierNewPSMT"),local("Liberation Mono");size-adjust:100%;ascent-override:102%;descent-override:30%;line-gap-override:0%}
+:root{--bg:#07060C;--cd:#110F1C;--ln:rgba(255,255,255,.08);--ink:#f2f5f0;--mut:#9aa59c;--g:#F43F5E;--gb:#E11D48;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 "Plus Jakarta Sans","Jakarta Fallback",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:50}
+[hidden]{display:none!important}
+h1,h2,h3,.an{font-family:Oswald,"Oswald Fallback",Impact,"Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;line-height:1.05;margin:0}
+h1,h2{font-size:clamp(2rem,8vw,3.2rem)}h3{font-size:1.3rem}
+.g{color:var(--g)}.mut{color:var(--mut)}.mono{font-family:"JetBrains Mono","Mono Fallback",ui-monospace,monospace}.sm{font-size:.85rem}
+.w{max-width:960px;margin:0 auto;padding:0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;background:var(--gb);color:#fff;font:800 1rem "Plus Jakarta Sans","Jakarta Fallback",system-ui,sans-serif;padding:14px 24px;cursor:pointer}
+.btn:active{transform:scale(.97)}.btn.s{padding:9px 18px;font-size:.9rem}.btn.big{width:100%;padding:17px;margin-top:14px}.btn.gh{background:var(--cd);color:var(--ink);border:1px solid var(--ln)}.btn.wh{background:#fff;color:#1f1f1f}.btn:disabled{opacity:.35;cursor:not-allowed}
+.lk0,.ar{background:none;border:0;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.hd,.fb{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;padding:8px 14px}
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:rgba(7,6,12,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.hr{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:2px 6px}
+.logo{display:flex;align-items:center;gap:8px;font-size:1.4rem;letter-spacing:1px}.ic svg{display:block}
+#mn{display:flex;gap:16px;justify-content:center;padding:6px;background:var(--cd);border-bottom:1px solid var(--ln)}
+.hero{position:relative;overflow:hidden;text-align:center;padding:50px 0 44px;background:radial-gradient(60% 40% at 50% 12%,rgba(244,63,94,.2),transparent),radial-gradient(40% 30% at 12% 62%,rgba(244,63,94,.08),transparent),linear-gradient(#0d0a1a,var(--bg))}
+.wm{position:absolute;inset:14px 0 auto;font:700 24vw/1 Oswald,"Oswald Fallback",Impact,sans-serif;color:rgba(255,255,255,.045);pointer-events:none}
+.hero h1{position:relative;font-size:clamp(2.7rem,12vw,5.2rem);margin-bottom:22px}
+.ph{position:relative;width:min(290px,78vw);margin:30px auto 0;border:7px solid #1d1930;border-radius:40px;background:#0D0B17;padding:12px;text-align:left;box-shadow:0 30px 90px rgba(244,63,94,.15)}
+.st,.pt,.pc{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.st{font:700 .72rem "JetBrains Mono","Mono Fallback",monospace;color:var(--mut)}.pt{margin:8px 0}.pt b{font-size:1.1rem;letter-spacing:1px}
+.bg2{border:1px solid var(--g);color:var(--g);border-radius:999px;padding:1px 9px;font:700 .65rem "JetBrains Mono","Mono Fallback",monospace}
+.sr{background:#181526;border-radius:12px;padding:9px 12px;color:var(--mut);font-size:.85rem}
+.pc{background:#181526;border:1px solid var(--ln);border-radius:16px;padding:10px;margin-top:6px}.pc b{font-size:.95rem}
+.mp{width:100%;display:block;max-width:440px;margin:0 auto}.mp .p{animation:pl 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pl{50%{transform:scale(1.9);opacity:.45}}
+.trust{display:flex;gap:12px;align-items:center;margin:26px auto;max-width:520px;border:1px solid var(--ln);background:var(--cd);border-radius:20px;padding:14px 16px}
+.trust i{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--gb);color:#fff;font-style:normal;font-weight:800}
+.sec{padding:40px 0}.hrow{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}
+.ar{width:42px;height:42px;border-radius:50%;border:1px solid var(--ln);background:var(--cd);font-size:1.4rem;margin-left:6px}
+.car{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 18px 14px;scrollbar-width:none}.car::-webkit-scrollbar{display:none}
+.spot{flex:0 0 min(62vw,250px);aspect-ratio:3/4;scroll-snap-align:start;position:relative;border-radius:24px;border:1px solid var(--ln);display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:16px;overflow:hidden}
+.spot em{position:absolute;top:16%;left:0;right:0;text-align:center;font-size:4.5rem;font-style:normal;filter:drop-shadow(0 0 18px rgba(244,63,94,.35))}
+.bd{align-self:flex-start;background:rgba(0,0,0,.6);color:#f4c542;border:1px solid rgba(244,197,66,.45);border-radius:999px;padding:3px 10px;font:700 .66rem "JetBrains Mono","Mono Fallback",monospace}
+.rv{flex:0 0 min(82vw,340px);scroll-snap-align:start;background:var(--cd);border:1px solid var(--ln);border-radius:24px;padding:20px}.rv b{color:#eab308;letter-spacing:2px}
+.num{font:700 clamp(4.2rem,22vw,8rem)/1 Oswald,"Oswald Fallback",Impact,sans-serif;color:var(--g)}
+.fq{background:var(--cd);border:1px solid var(--ln);border-radius:20px;margin-bottom:10px}
+.fq button{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background:none;border:0;color:var(--ink);padding:18px;font:700 1.15rem Oswald,"Oswald Fallback",Impact,sans-serif;text-transform:uppercase;text-align:left;cursor:pointer}
+.fq i{font-style:normal;font-size:1.6rem;color:var(--g);transition:transform .2s}.fq.o i{transform:rotate(45deg)}
+.fq p{display:none;margin:0;padding:0 18px 18px;color:var(--mut)}.fq.o p{display:block}
+footer{border-top:1px solid var(--ln);padding:28px 18px 40px;text-align:center;color:var(--mut);font-size:.85rem}footer nav{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin:12px 0}
+#fn,#sn,#gt,#ap{min-height:100vh}
+.cd{max-width:520px;margin:8px auto;background:var(--cd);border:1px solid var(--ln);border-radius:28px;padding:24px 20px}
+.dt{display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--mut);margin-bottom:12px}.dt i{width:7px;height:7px;border-radius:50%;background:#2a2640}.dt i.on{background:var(--g)}.dt span{margin-left:6px}
+.rowb{display:flex;justify-content:space-between;gap:10px;font-size:.78rem;margin:6px 0}
+.pb{height:6px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}.pb i{display:block;height:100%;background:var(--g);transition:width .4s}
+.kk{font:700 .72rem "JetBrains Mono","Mono Fallback",monospace;letter-spacing:1px;color:var(--g);margin:0 0 8px}.cd h1,.cd h2{margin-bottom:8px}
+.in{width:100%;background:#0D0B17;border:1px solid var(--ln);border-radius:14px;color:var(--ink);font:inherit;padding:15px 16px;margin-top:14px}.in:focus{outline:2px solid var(--g)}
+.age{text-align:center;font:700 5.4rem/1 Oswald,"Oswald Fallback",Impact,sans-serif;margin:14px 0}.age.mono{font:700 4.2rem "JetBrains Mono","Mono Fallback",monospace}
+.rl{display:flex;justify-content:space-between;font:600 .85rem "JetBrains Mono","Mono Fallback",monospace;color:var(--mut)}.rl span{width:2.2em;text-align:center}.rl .cur{color:var(--g);font-size:1.1rem}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:9px;background:rgba(255,255,255,.14);outline:0;margin:12px 0}
+input[type=range].fear{background:linear-gradient(90deg,#68f21d,#eab308,#f97316,#ef4444,#7f1d1d)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:32px;height:32px;border-radius:50%;background:#fff;border:5px solid var(--tc,var(--g));cursor:grab}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--tc,var(--g))}
+.gd{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 10px}
+.tile{position:relative;aspect-ratio:1/1.05;border-radius:18px;border:2px solid var(--ln);display:flex;align-items:flex-end;padding:10px;color:#fff;font:800 .9rem "Plus Jakarta Sans","Jakarta Fallback",sans-serif;text-align:left;cursor:pointer;overflow:hidden}
+.tile em{position:absolute;top:14%;left:0;right:0;text-align:center;font-size:2.8rem;font-style:normal}
+.tile u{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,.4);display:grid;place-items:center;text-decoration:none;font-size:.8rem;color:transparent}
+.tile.on{border-color:var(--g)}.tile.on u{background:var(--gb);border-color:var(--gb);color:#fff}
+.tier{display:inline-block;border:1px solid;border-radius:999px;padding:4px 14px;font:700 1.05rem Oswald,"Oswald Fallback",Impact,sans-serif;margin:14px 0 6px}
+.ls{margin-top:6px;border-radius:14px;background:#0D0B17;border:1px solid var(--ln);max-height:220px;overflow:auto}.ls:empty{display:none}
+.ls button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--ln);color:var(--ink);padding:12px 14px;font:600 .88rem "JetBrains Mono","Mono Fallback",monospace;cursor:pointer}
+.rd{width:min(250px,68vw);aspect-ratio:1;border-radius:50%;margin:22px auto;border:2px solid rgba(244,63,94,.5);background:repeating-radial-gradient(circle,transparent 0 30px,rgba(244,63,94,.2) 31px 32px);position:relative;overflow:hidden}
+.rd::after{content:"";position:absolute;inset:0;background:conic-gradient(rgba(244,63,94,.6),transparent 28%);animation:sp 1.5s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.gb{position:fixed;inset:0;z-index:0;filter:blur(7px);opacity:.55;display:grid;place-items:center;padding:20px}.gate{position:relative;z-index:2}
+.pl{position:relative;overflow:hidden;background:var(--cd);border:1px solid var(--ln);border-radius:20px;padding:16px;margin-top:10px}.pl p{margin:6px 0}
+.bl{filter:blur(5px);user-select:none}.lo{position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem}
+.cta{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(7,6,12,.92);backdrop-filter:blur(10px);border-top:1px solid var(--ln)}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#fff;color:#07060C;padding:10px 16px;border-radius:12px;font-weight:800;z-index:60;max-width:90vw;text-align:center}
+.hero{background:radial-gradient(60% 40% at 50% 12%,rgba(244,63,94,.22),transparent),radial-gradient(45% 35% at 88% 55%,rgba(139,92,246,.2),transparent),linear-gradient(#0d0a1a,var(--bg))}
+.btn{box-shadow:0 8px 26px rgba(244,63,94,.32)}.btn.gh,.btn.wh,.btn:disabled{box-shadow:none}
+#pg{min-height:100vh}#pg p,#pg li{color:var(--mut)}#pg h3,#pg h2.h3{margin:18px 0 6px;color:var(--ink)}h2.h3{font-size:1.3rem}
+.plans{display:grid;gap:14px;margin:14px 0}@media(min-width:760px){.plans{grid-template-columns:1fr 1fr}}
+.plan{background:var(--cd);border:1px solid var(--ln);border-radius:28px;padding:22px 20px}.plan.hot{border-color:var(--g);box-shadow:0 0 40px rgba(244,63,94,.25)}
+.plan h2{font-size:1.3rem}.plan .pr{font-size:2.4rem;font-weight:700;color:var(--g)}.plan ul{list-style:none;padding:0;margin:12px 0;display:grid;gap:6px;font-size:.92rem}
+.bd2{display:inline-block;border-radius:999px;padding:3px 12px;font:700 .68rem "JetBrains Mono","Mono Fallback",monospace;background:rgba(139,92,246,.2);color:#c4b5fd}.hot .bd2{background:#F59E0B;color:#07060C}
+.md{position:fixed;inset:0;z-index:70;background:rgba(7,6,12,.82);display:grid;place-items:center;padding:16px;overflow:auto}
+.flt{display:grid;gap:8px;grid-template-columns:1fr 1fr}.flt .in{margin-top:0}.flt label{grid-column:1/-1}@media(min-width:760px){.flt{grid-template-columns:2fr 1fr 1fr 1fr}.flt label{grid-column:auto}}
+#mp{position:relative;isolation:isolate;height:62vh;min-height:340px;border-radius:24px;overflow:hidden;border:1px solid var(--ln);margin:10px 0}
+.pulse{animation:pls 2s ease-in-out infinite}@keyframes pls{50%{stroke-width:11;stroke-opacity:.25}}
+select.in{appearance:auto}
+a.btn{text-decoration:none}
+button.logo{background:none;border:0;padding:0;color:var(--ink);cursor:pointer}
+#an,#cg{min-height:100vh;text-align:center}
+.anm{width:min(520px,92vw);margin:10px auto;border:1px solid var(--ln);border-radius:28px;background:radial-gradient(circle at 50% 45%,rgba(139,92,246,.16),transparent 70%),var(--cd);overflow:hidden}
+.anm svg{max-width:none}
+.rg{font:700 clamp(1.7rem,7vw,2.5rem)/1.1 Oswald,"Oswald Fallback",Impact,sans-serif;text-transform:uppercase;color:var(--g);min-height:1.2em;margin-top:6px}
+.mp .p.dot{animation:fi .35s ease-out,pl 2.4s ease-in-out .35s infinite}
+@keyframes fi{from{opacity:0;transform:scale(3)}}
+.gift{display:block;width:min(230px,62vw);margin:14px auto 4px;background:none;border:0;padding:0;cursor:pointer;animation:wob 2.4s ease-in-out infinite}
+.gift svg{display:block;width:100%}
+@keyframes wob{0%,78%,100%{transform:rotate(0)}84%{transform:rotate(-6deg)}90%{transform:rotate(6deg)}95%{transform:rotate(-3deg)}}
+.gift .lid{transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .65s;transform-box:fill-box;transform-origin:center bottom}
+.gift .glow{opacity:0;transition:opacity .5s}
+.gift.open{animation:none}.gift.open .lid{transform:translateY(-46px) rotate(-18deg);opacity:0}.gift.open .glow{opacity:1}
+button.plan{position:relative;display:block;width:100%;text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.plan.sel{border-color:var(--g);box-shadow:0 0 0 2px var(--g),0 0 40px rgba(244,63,94,.25)}
+.plan .ck{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:grid;place-items:center;font-weight:800;color:transparent}
+.plan.sel .ck{background:var(--gb);border-color:var(--gb);color:#fff}
+.plan li.no{color:#8a948c}
+.bd2.gold{background:#F59E0B;color:#07060C}
+@media(prefers-reduced-motion:reduce){.gift,.mp .p,.mp .p.dot{animation:none}.gift .lid{transition:none}}
+.spot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(.72) contrast(1.05)}
+.spot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,6,12,.15) 30%,rgba(7,6,12,.96));z-index:1}
+.spot .bd,.spot h3,.spot .cr{position:relative;z-index:2}
+.spot .cr{position:absolute;top:10px;right:12px;font:500 .68rem "Plus Jakarta Sans","Jakarta Fallback",sans-serif;color:rgba(255,255,255,.92);text-decoration:none;background:rgba(7,6,12,.7);padding:3px 8px;border-radius:999px}
+.plans{grid-template-columns:1fr 1fr!important;gap:10px}
+@media(max-width:759px){.plan{padding:16px 11px!important;border-radius:20px!important}.plan h2{font-size:.95rem}.plan .pr{font-size:1.45rem!important}.plan .pr small{font-size:.75rem}.plan ul{font-size:.72rem;gap:6px!important;margin:10px 0 0!important}.plan .bd2{font-size:.52rem;padding:2px 6px}.plan .ck{top:10px!important;right:10px!important;width:22px!important;height:22px!important;font-size:.7rem}.plan p.sm{font-size:.7rem}}
+#mp.leaflet-container,#mp{background:#dfe3e6}
+#mp .leaflet-control-attribution{background:rgba(7,6,12,.7);color:var(--mut)}#mp .leaflet-control-attribution a{color:var(--mut)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) brightness(.55) contrast(1.1);transition:filter .25s}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,6,12,0) 35%,rgba(7,6,12,.92));z-index:1}
+.tile .tt,.tile u{z-index:2}.tile .tt{position:relative;line-height:1.2}
+.tile.on img{filter:grayscale(0) brightness(.75) contrast(1.1)}
+.rs{margin:0 0 6px;padding-left:20px;display:grid;gap:4px}
+.err{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.45);font-size:.9rem;text-align:left}.err small{display:block;margin-top:6px;color:var(--mut);font-size:.7rem;word-break:break-word}
+.dg{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:10px;text-align:left}
+.netw{position:sticky;top:0;z-index:80;display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:#7f1d1d;color:#fff;font-size:.85rem;line-height:1.4}.netw button{color:#fff;font-size:1rem;margin-left:auto}
+#mp .leaflet-popup-content-wrapper{border-radius:16px}#mp .leaflet-popup-content{margin:12px 14px;font-family:"Plus Jakarta Sans","Jakarta Fallback",sans-serif;color:#111}
+.pp .pk{display:block;font:700 .62rem "JetBrains Mono","Mono Fallback",monospace;color:#be123c;text-transform:uppercase;letter-spacing:.5px}.pp .pn{display:block;margin:4px 0 2px;font:700 1.05rem Oswald,"Oswald Fallback",Impact,sans-serif;text-transform:uppercase;line-height:1.1;color:#07060C}.pp span{font-size:.75rem;color:#555}.pp p{margin:6px 0 8px!important;font-size:.8rem;line-height:1.35;color:#222}
+.pp .ppb{display:flex;gap:6px}.pp .ppb>*{flex:1;text-align:center;border:0;border-radius:999px;padding:7px 8px;font:700 .75rem "Plus Jakarta Sans","Jakarta Fallback",sans-serif;cursor:pointer;text-decoration:none}.pp .ppb button{background:#E11D48;color:#fff}.pp .ppb a{background:#eee;color:#111!important}
+@media(max-width:600px){.hidem{display:none}}
+
+/* ---- Accessibilité, mise en page stable, pages légales ---- */
+.vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #fff;outline-offset:2px}
+.in:focus-visible{outline:3px solid #fff;outline-offset:1px}
+main:focus,h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none}
+::placeholder{color:#8f9a92;opacity:1}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#fff;color:#07060C;padding:10px 16px;border-radius:12px;font-weight:800;text-decoration:none}.skip:focus{top:calc(8px + env(safe-area-inset-top,0px))}
+#m1,#m2{max-width:440px;margin-left:auto;margin-right:auto;aspect-ratio:208/202}
+.car:focus-visible{outline-offset:-3px}
+footer nav button,footer nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
+footer a.lk0{text-decoration:none}
+.lk0{padding:8px 4px}
+.hr .lk0{min-height:44px}
+.logo{min-height:44px}
+.fq button{min-height:48px}
+.sb{background:none;border:0;padding:0}
+.ppb a:focus-visible,.ppb button:focus-visible{outline-color:#07060C}
+.plist{margin:10px 0 0}.plist summary{cursor:pointer;font:700 .9rem "JetBrains Mono","Mono Fallback",monospace;padding:12px 4px;min-height:44px}
+.plist ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));max-height:340px;overflow:auto}
+.plist li button{width:100%;text-align:left;background:var(--cd);border:1px solid var(--ln);border-radius:14px;color:var(--ink);padding:10px 12px;min-height:44px;font:600 .85rem "Plus Jakarta Sans","Jakarta Fallback",sans-serif;cursor:pointer}
+.plist li button small{display:block;color:var(--mut);font-weight:500}
+.lg{max-width:720px;margin:0 auto;padding:0 18px 60px}
+.lg .top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0}
+.lg h1{margin:10px 0 14px}.lg h2{font-size:1.3rem;margin:26px 0 6px}
+.lg p,.lg li{color:var(--mut)}.lg li{margin:4px 0}.lg a{color:#fff;text-underline-offset:3px}.lg b{color:var(--ink)}
+.lg .todo{color:#f4c542}
+.lg .meta{font-size:.8rem;color:var(--mut)}
+.pay-note{font-size:.8rem;color:var(--mut);text-align:center;margin:10px 0 0}.pay-note a{color:#fff}
+.cd .sub{color:var(--mut);font-size:.85rem}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}.pulse,.rd::after{animation:none!important}.rd::after{opacity:.35}}

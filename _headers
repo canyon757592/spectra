@@ -1,0 +1,33 @@
+# En-têtes de sécurité appliqués par Cloudflare Pages à tout le site.
+# Politique de contenu : seuls le site lui-même, la base Supabase, la recherche de communes (geo.api.gouv.fr),
+# les tuiles OpenStreetMap et les photos Wikimedia sont autorisés. Aucun script externe.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://commons.wikimedia.org https://upload.wikimedia.org; font-src 'self'; connect-src 'self' https://uvkuviibpwtzgqvlzycf.supabase.co wss://uvkuviibpwtzgqvlzycf.supabase.co https://geo.api.gouv.fr; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(self), gyroscope=(), microphone=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+/index.html
+  Cache-Control: no-cache
+
+/app.js
+  Cache-Control: no-cache
+
+/style.css
+  Cache-Control: no-cache
+
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# L'adresse de test spectra-4m3.pages.dev (et ses aperçus) reste hors de Google : seul spectracarte.com doit être indexé.
+https://spectra-4m3.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:deployment.spectra-4m3.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
